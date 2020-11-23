@@ -26,7 +26,7 @@ def verify(name=None):
 	try:
 		# Opens file
 		os.startfile(a[0] + '/' + a[1])
-		sleep(20)
+		sleep(10)
 		# Call upload function to send prescription through mail
 		upload(p)
 	except:
@@ -36,14 +36,18 @@ def verify(name=None):
 # Function for existing audio file
 def doc():
 	# Open existing audio file
-	filename = filedialog.askopenfilename(initialdir="F:\\Mini Projects Rishi\\voice prescription", title="Select file", filetypes=("wav files", "*.wav"))
+	filename = filedialog.askopenfilename(initialdir="F:\\Mini Projects Rishi\\voice prescription", title="Select file", filetypes=(("wav files", "*.wav"),("all files", "*.*")))
 	# split path and filename
 	a = os.path.split(filename)
 	a = a[0] + "/" + a[1]
 
 	r = sr.Recognizer()
-	with sr.AudioFile(a) as source:
-		audio = r.listen(source)
+	try:
+		with sr.AudioFile(a) as source:
+			audio = r.listen(source)
+	except:
+		messagebox.showerror("ERROR","Could not open file, please select .wav file")
+		return
 	try:
 		# Convert audio to text
 		text = r.recognize_google(audio)
@@ -55,7 +59,7 @@ def doc():
 		# Verify document
 		verify(name)
 	except:
-		messagebox.showerror("Could not recognize the voice")
+		messagebox.showerror("ERROR","Could not recognize the voice")
 
 
 # Function for live recording
@@ -76,7 +80,7 @@ def listen():
 		# Verify document
 		verify(name)
 	except:
-		messagebox.showerror("Could not recognize the voice")
+		messagebox.showerror("ERROR", "Could not recognize the voice")
 
 
 # Create GUI main window
