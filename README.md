@@ -15,7 +15,7 @@ With the increasing number of patients, it is very difficult for the doctors to 
   2.Ms Word<br>
  
  # Dependencies:  
-  1.python docx - `pip install docx`<br>
+  1.python docx - `pip install python-docx`<br>
   2.Speech Recognition - `pip install SpeechRecognition`<br>
   3.PyAudio - `pip install PyAudio`<br>
   
