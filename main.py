@@ -6,9 +6,9 @@ from time import sleep
 
 
 # Import local modules
-from prescription.extract_text import extract
-from prescription.create_document import create
-from prescription.send_mail import upload
+from extract_text import extract
+from create_document import create
+from send_mail import upload
 
 
 # Function to open the file for verification
