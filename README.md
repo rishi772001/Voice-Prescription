@@ -19,12 +19,6 @@ With the increasing number of patients, it is very difficult for the doctors to 
   2.Speech Recognition - `pip install SpeechRecognition`<br>
   3.PyAudio - `pip install PyAudio`<br>
   
- ## contributors:
-  1.Rishi Raj G<br>
-  2.Swathy T<br>
-  3.Sabariraj T G<br>
-  4.Swetha J<br>
-  5.Supriya Roy<br>
-  6.Shreevarshan K<br>
+ 
  
 
