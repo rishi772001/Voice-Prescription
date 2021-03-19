@@ -44,7 +44,7 @@ def upload_util(name, emailid, upload_prompt):
     msg.attach(p)
     s = smtplib.SMTP('smtp.gmail.com', 587)
     s.starttls()
-    s.login(fromaddr, "Rishi@2001")  # Enter Your email password
+    s.login(fromaddr, "")  # Enter Your email password
     text = msg.as_string()
     s.sendmail(fromaddr, toaddr, text)
     messagebox.showinfo("Successfully completed", "Prescription sent successfully")
