@@ -37,6 +37,7 @@ def verify(name=None):
 def doc():
 	# Open existing audio file
 	filename = filedialog.askopenfilename(initialdir="F:\\Mini Projects Rishi\\voice prescription", title="Select file", filetypes=(("wav files", "*.wav"),("all files", "*.*")))
+	
 	# split path and filename
 	a = os.path.split(filename)
 	a = a[0] + "/" + a[1]
@@ -48,19 +49,36 @@ def doc():
 	except:
 		messagebox.showerror("ERROR","Could not open file, please select .wav file")
 		return
+
+	# Convert audio to text
 	try:
-		# Convert audio to text
 		text = r.recognize_google(audio)
 		messagebox.showinfo("Alert", "Converted Text: {}".format(text))
-		# Extract text
-		name, age, date, tablet, syrup = extract(text)
-		# Create document
-		create(name, age, date, tablet, syrup)
-		# Verify document
-		verify(name)
 	except:
 		messagebox.showerror("ERROR","Could not recognize the voice")
+	
+	# Extract text
+	try:
+		name, age, date, tablet = extract(text)
+	except ValueError:
+		messagebox.showerror("ERROR","Could not find patient Name")
+	except:
+		messagebox.showerror("ERROR","Could not extract text")
+	
+	# Create document
+	try:
+		create(name, age, date, tablet)
+	except PermissionError:
+		messagebox.showerror("ERROR","The document is open, please close and try again!")
+	except:
+		messagebox.showerror("ERROR","Could not create document")
 
+	# Verify document
+	try:
+		verify(name)
+	except:
+		messagebox.showerror("ERROR","Could not open file")
+	
 
 # Function for live recording
 def listen():
@@ -69,18 +87,35 @@ def listen():
 		messagebox.showinfo("Alert", "Start Speaking")
 		audio = r.listen(source)
 		messagebox.showinfo("Alert", "completed.")
+	
+	# Convert audio to text
 	try:
-		# Convert audio to text
 		text = r.recognize_google(audio)
-		messagebox.showinfo("Alert", "Converted Text:{}".format(text))
-		# Extract text
-		name, age, date, tablet, syrup = extract(text)
-		# Create document
-		create(name, age, date, tablet, syrup)
-		# Verify document
+		messagebox.showinfo("Alert", "Converted Text: {}".format(text))
+	except:
+		messagebox.showerror("ERROR","Could not recognize the voice")
+	
+	# Extract text
+	try:
+		name, age, date, tablet = extract(text)
+	except ValueError:
+		messagebox.showerror("ERROR","Could not find patient Name")
+	except:
+		messagebox.showerror("ERROR","Could not extract text")
+	
+	# Create document
+	try:
+		create(name, age, date, tablet)
+	except PermissionError:
+		messagebox.showerror("ERROR","The document is open, please close and try again!")
+	except:
+		messagebox.showerror("ERROR","Could not create document")
+
+	# Verify document
+	try:
 		verify(name)
 	except:
-		messagebox.showerror("ERROR", "Could not recognize the voice")
+		messagebox.showerror("ERROR","Could not open file")
 
 
 # Create GUI main window
