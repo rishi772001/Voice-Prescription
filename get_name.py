@@ -3,6 +3,7 @@ from nameparser.parser import HumanName
 import re
 
 def get_human_names(text):
+    # uncomment below line for the first time
     # nltk.download()
 
     tokens = nltk.tokenize.word_tokenize(text)
